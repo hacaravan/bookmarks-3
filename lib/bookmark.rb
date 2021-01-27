@@ -4,7 +4,7 @@ class Bookmark
 
   attr_reader :title, :url
 
-  def initialize(title, url)
+  def initialize(url, title)
     @title = title
     @url = url
   end
@@ -36,7 +36,7 @@ class Bookmark
       results = connection.exec "Select * from bookmarks"
       # results.each { |row| out_arr << row['url'] }
       results.map do |bookmark|
-        out_arr << Bookmark.new(bookmark['title'], bookmark['url'])
+        out_arr << Bookmark.new(bookmark['url'], bookmark['title'])
       end
 
 

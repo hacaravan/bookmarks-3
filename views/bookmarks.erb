@@ -2,6 +2,7 @@
 <%= @bookmarks.join('<br>') %>
 
 <form action="/bookmarks" method="post">
+  <input type="text" name="title" placeholder="Enter bookmark title here"/>
   <input type="text" name="url" placeholder="Enter URL here"/>
   <input type="submit" value="Add URL"/>
 </form>

@@ -4,22 +4,26 @@ class Bookmark
 
   attr_reader :title, :url
 
+  def initialize(title, url)
+    @title = title
+    @url = url
+  end
+
   def self.all
     self.urls_from_db
   end
 
-  def self.create(url)
+  def self.create(url, title)
     database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
     begin
       connection = PG.connect dbname: database, user: ENV["USER"]
-      results = connection.exec "insert into bookmarks (url) values('#{url}')"
-      results.each { |row| out_arr << row['url'] }
+      connection.exec "insert into bookmarks (url, title) values('#{url}', '#{title}')"
 
     rescue PG::Error => e
       puts e.message
 
     ensure
-      results.clear if results
+      # results.clear if results
       connection.close if connection
     end
   end
@@ -30,7 +34,11 @@ class Bookmark
     begin
       connection = PG.connect dbname: database, user: ENV["USER"]
       results = connection.exec "Select * from bookmarks"
-      results.each { |row| out_arr << row['url'] }
+      # results.each { |row| out_arr << row['url'] }
+      results.map do |bookmark|
+        out_arr << Bookmark.new(bookmark['title'], bookmark['url'])
+      end
+
 
     rescue PG::Error => e
       puts e.message

@@ -17,8 +17,8 @@ def truncate_test_table
 
 end
 
-def add_test_url(url)
+def add_test_url(url, title)
 
-  Bookmark.create(url)
+  Bookmark.create(url, title)
 
 end

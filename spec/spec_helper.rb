@@ -21,6 +21,11 @@ Capybara.app = BookmarkManager
 
 RSpec.configure do |config|
 
+  config.before(:each) do
+    truncate_test_table
+    add_test_url
+  end
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end

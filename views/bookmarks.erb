@@ -1,2 +1,7 @@
-
+<h1>Your bookmarks</h1>
 <%= @bookmarks.join('<br>') %>
+
+<form action="/bookmarks" method="post">
+  <input type="text" name="url" placeholder="Enter URL here"/>
+  <input type="submit" value="Add URL"/>
+</form>

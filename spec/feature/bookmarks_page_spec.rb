@@ -6,3 +6,12 @@ feature "bookmarks page" do
   end
 
 end
+
+feature 'Adding bookmarks' do
+  scenario 'User can add a bookmark to the list and see it' do
+    visit '/bookmarks'
+    fill_in('url', with: 'http:/www.bbc.co.uk')
+    click_button('Add URL')
+    expect(page).to have_content 'http:/www.bbc.co.uk'
+  end
+end

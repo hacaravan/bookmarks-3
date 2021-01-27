@@ -1,11 +1,18 @@
 ## Bookmarks Manager
 
 First user story:
-```
-As a user
-So I can remember what sites I like to visit
+>As a user  
+So I can remember what sites I like to visit  
 I want to see a list of bookmarks
-```
+>
+
+Second User Story:
+>¯As a user
+So that I can personalise the bookmarks I have
+I want to add bookmarks
+>
+
+
 Classes:
 Bookmark,  
 BookmarkManager (has list of Bookmarks).  

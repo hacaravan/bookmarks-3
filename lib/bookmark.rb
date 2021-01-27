@@ -8,6 +8,22 @@ class Bookmark
     self.urls_from_db
   end
 
+  def self.create(url)
+    database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
+    begin
+      connection = PG.connect dbname: database, user: ENV["USER"]
+      results = connection.exec "insert into bookmarks (url) values('#{url}')"
+      results.each { |row| out_arr << row['url'] }
+
+    rescue PG::Error => e
+      puts e.message
+
+    ensure
+      results.clear if results
+      connection.close if connection
+    end
+  end
+
   def self.urls_from_db
     out_arr = []
     database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'

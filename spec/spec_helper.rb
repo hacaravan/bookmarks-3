@@ -23,7 +23,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     truncate_test_table
-    add_test_url
   end
 
   config.expect_with :rspec do |expectations|

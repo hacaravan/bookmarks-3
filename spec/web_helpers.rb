@@ -17,13 +17,13 @@ def truncate_test_table
 
 end
 
-def add_test_url
+def add_test_url(url)
 
   begin
 
     connection = PG.connect dbname: 'bookmark_manager_test', user: ENV["USER"]
 
-    connection.exec "insert into bookmarks (url) values ('http://www.makersacademy.com')"
+    connection.exec "insert into bookmarks (url) values ('#{url}')"
 
     rescue PG::Error => e
       puts e.message

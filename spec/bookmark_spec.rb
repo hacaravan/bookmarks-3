@@ -32,4 +32,13 @@ describe Bookmark do
     end
   end
 
+  describe '.delete' do 
+    it 'deletes a bookmark in the bookmarks table' do 
+      bookmark = described_class.create(url, title)
+      Bookmark.delete(bookmark.id)
+      bookmarks = described_class.all 
+      expect(bookmarks).to be_empty
+    end
+  end
+
 end

@@ -29,6 +29,19 @@ class Bookmark
     end
   end
 
+  def self.delete(id)
+    database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
+    begin
+      connection = PG.connect dbname: database, user: ENV['USER']
+      result = connection.exec "DELETE FROM bookmarks WHERE id = #{id};"
+    rescue PG::Error => e
+      puts e.message
+
+    ensure 
+      connection.close if connection 
+    end
+  end
+
   def self.urls_from_db
     out_arr = []
     database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'

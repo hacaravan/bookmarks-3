@@ -4,15 +4,20 @@ feature "bookmarks page" do
     visit "/bookmarks"
     expect(page).to have_link('Makers')
   end
-
 end
 
 feature 'Adding bookmarks' do
   scenario 'User can add a bookmark to the list and see it' do
-    visit '/bookmarks'
-    fill_in('url', with: 'http://www.bbc.co.uk')
-    fill_in('title', with: 'bbc')
-    click_button('Add URL')
+    visit_and_add
     expect(page).to have_link('bbc')
+  end
+end
+
+feature 'deleting bookmarks' do 
+  scenario 'User can delete selected bookmarks on the list' do 
+    visit_and_add
+    expect(page).to have_link('bbc')
+    click_button "Delete bbc bookmark"
+    expect(page).to have_no_link('bbc')
   end
 end

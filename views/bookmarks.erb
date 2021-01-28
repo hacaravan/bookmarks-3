@@ -2,6 +2,7 @@
 <% @bookmarks.each do |bookmark| %>
 
 <a href="<%= bookmark.url %>"><%= bookmark.title %></a>
+<a href="/bookmarks"><button>Delete <%=bookmark.title%> bookmark</button></a>
 <br>
 
 <% end %>

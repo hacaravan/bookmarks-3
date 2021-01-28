@@ -2,7 +2,9 @@
 <% @bookmarks.each do |bookmark| %>
 
 <a href="<%= bookmark.url %>"><%= bookmark.title %></a>
-<a href="/bookmarks"><button>Delete <%=bookmark.title%> bookmark</button></a>
+<form action="/bookmarks/delete" method="post">
+  <button name="id" value="<%=bookmark.id%>">Delete <%=bookmark.title%> bookmark</button></a>
+</form>
 <br>
 
 <% end %>

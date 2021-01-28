@@ -1,5 +1,10 @@
 <h1>Your bookmarks</h1>
-<%= @bookmarks.map{ |bookmark| "<a href=\"#{bookmark.url}\">#{bookmark.title}</a>" }.join('<br>') %>
+<% @bookmarks.each do |bookmark| %>
+
+<a href="<%= bookmark.url %>"><%= bookmark.title %></a>
+<br>
+
+<% end %>
 
 <form action="/bookmarks" method="post">
   <input type="text" name="title" placeholder="Enter bookmark title here"/>

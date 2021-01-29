@@ -47,12 +47,23 @@ describe Bookmark do
       id = bookmark.id
       new_url, new_title = "http://netflix.com", "Netflix"
       Bookmark.update(id, new_url, new_title)
-      bookmarks = described_class.all
-      new_bookmark = bookmarks.first
+      new_bookmark = described_class.all.first
       expect(new_bookmark).to be_a(Bookmark)
       expect(new_bookmark.title).to eq new_title
       expect(new_bookmark.url).to eq new_url
       expect(new_bookmark.id).to eq id
+    end
+  end
+
+  describe '.find_by_id' do
+    it 'brings back the bookmark object you want' do
+      bookmark = described_class.create(url, title)
+      id = bookmark.id
+      returned_bookmark = Bookmark.find_by_id(id)
+      expect(returned_bookmark).to be_a(Bookmark)
+      expect(returned_bookmark.title).to eq title
+      expect(returned_bookmark.url).to eq url
+      expect(returned_bookmark.id).to eq id
     end
   end
 

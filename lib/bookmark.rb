@@ -48,6 +48,13 @@ class Bookmark
     result = connection.exec "update bookmarks set url = '#{new_url}', title = '#{new_title}' where id = #{id} returning id, title, url;"
   end
 
+  def self.find_by_id(id)
+    database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
+    connection = PG.connect dbname: database, user: ENV["USER"]
+    result = connection.exec "select * from bookmarks where id = #{id};"
+    Bookmark.new(result[0]['id'], result[0]['url'], result[0]['title'])
+  end
+
   def self.urls_from_db
     out_arr = []
     database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'

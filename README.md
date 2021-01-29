@@ -12,6 +12,18 @@ So that I can personalise the bookmarks I have
 I want to add bookmarks
 >
 
+Third User Story:
+> As a user   
+So that I can get rid of bookmarks I no longer need  
+I want to delete bookmarks  
+>
+
+Fourth User Story:
+> As a user
+So that I can correct my stupid mistakes
+I want to edit bookmark names and/or URLs
+>
+
 
 Classes:
 Bookmark,  

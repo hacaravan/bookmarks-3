@@ -32,12 +32,27 @@ describe Bookmark do
     end
   end
 
-  describe '.delete' do 
-    it 'deletes a bookmark in the bookmarks table' do 
+  describe '.delete' do
+    it 'deletes a bookmark in the bookmarks table' do
       bookmark = described_class.create(url, title)
       Bookmark.delete(bookmark.id)
-      bookmarks = described_class.all 
+      bookmarks = described_class.all
       expect(bookmarks).to be_empty
+    end
+  end
+
+  describe '.update' do
+    it 'changes the URL and Name of a bookmark' do
+      bookmark = described_class.create(url, title)
+      id = bookmark.id
+      new_url, new_title = "http://netflix.com", "Netflix"
+      Bookmark.update(id, new_url, new_title)
+      bookmarks = described_class.all
+      new_bookmark = bookmarks.first
+      expect(new_bookmark).to be_a(Bookmark)
+      expect(new_bookmark.title).to eq new_title
+      expect(new_bookmark.url).to eq new_url
+      expect(new_bookmark.id).to eq id
     end
   end
 

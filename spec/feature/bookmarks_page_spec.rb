@@ -13,11 +13,22 @@ feature 'Adding bookmarks' do
   end
 end
 
-feature 'deleting bookmarks' do 
-  scenario 'User can delete selected bookmarks on the list' do 
+feature 'deleting bookmarks' do
+  scenario 'User can delete selected bookmarks on the list' do
     visit_and_add
-    expect(page).to have_link('bbc')
     click_button "Delete bbc bookmark"
+    expect(page).to have_no_link('bbc')
+  end
+end
+
+feature 'Updating bookmarks' do
+  scenario 'User can change URL & name for bookmark' do
+    visit_and_add
+    click_button "Edit bbc bookmark"
+    fill_in('URL', with: 'http://www.twitter.com')
+    fill_in('Name', with: 'Twitter')
+    click_button('Update Link')
+    expect(page).to have_link('Twitter', href: 'http://www.twitter.com')
     expect(page).to have_no_link('bbc')
   end
 end

@@ -37,9 +37,15 @@ class Bookmark
     rescue PG::Error => e
       puts e.message
 
-    ensure 
-      connection.close if connection 
+    ensure
+      connection.close if connection
     end
+  end
+
+  def self.update(id, new_url, new_title)
+    database = ENV['RACK ENV'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
+    connection = PG.connect dbname: database, user: ENV["USER"]
+    result = connection.exec "update bookmarks set url = '#{new_url}', title = '#{new_title}' where id = #{id} returning id, title, url;"
   end
 
   def self.urls_from_db
